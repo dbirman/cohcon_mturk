@@ -1,0 +1,19 @@
+%%
+files = dir('~/proj/jgl/cohcon/*.mat');
+
+for fi = 1:length(files)
+    load(fullfile('~/proj/jgl/cohcon/',files(fi).name));
+   
+    stop = 1;
+    
+    %% some silly test analysis
+    dif = jglData.sStop-jglData.sStart;
+    train1 = dif(1:10);
+    train2 = dif(11:20);
+    exp1 = dif(21:70);
+    exp2 = dif(72:end);
+    crit = dif(71);
+    
+    %% e
+    e = getTaskParameters(myscreen,task);
+end
