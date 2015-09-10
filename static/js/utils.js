@@ -28,13 +28,20 @@ sortIndices = function (array,indices) {
     return(ret);
 }
 
+/**
+ * Function to adjust the contrast of a stimulus relative to the screen gamma.
+ * You must set myscreen.pow via the calibration.html survey first. This function
+ * returns the hex of your color.
+ */
 con2hex = function(contrast) {
-	con = Math.round(contrast*255);
+	con = Math.round(Math.pow(contrast,1/myscreen.pow)*255);
 	conS = con.toString(16);
+	if (conS.length == 1) {
+		conS = conS + conS;
+	}
 	hex = '#' + conS + conS + conS;
 	return(hex);
 }
-
 
 function randomInteger(n) {
 	return Math.floor(Math.random()*n);

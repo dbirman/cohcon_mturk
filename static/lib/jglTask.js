@@ -13,9 +13,8 @@ var blockRandomization = function(task, parameter, previousParamIndexes) {
 		}
 		return parameter;
 	}
-	
-	
-	var paramIndexes = [];
+
+	paramIndexes = [];
 	var block = {};
 	block.parameter = {};
 	for (var paramnum = 0;paramnum<parameter.n_;paramnum++) {
@@ -2215,6 +2214,28 @@ function multiply(first, second) {
 	}
 }
 
+function exp(first,second) {
+	if ($.isArray(first) && $.isArray(second)) {
+		if (first.length != second.length) {
+			throw "array multiply, dimensions don't agree";
+		}
+		return jQuery.map(first, function(n, i) {
+			return Math.pow(n, second[i]);
+		});
+	} else if ($.isArray(first) && ! $.isArray(second)) {
+		return jQuery.map(first, function(n, i) {
+			return Math.pow(n, second);
+		});
+	} else if (! $.isArray(first) && $.isArray(second)) {
+		return jQuery.map(second, function(n, i) {
+			return Math.pow(n, first);
+		});
+	} else {
+		return Math.pow(first,second);
+	}
+
+}
+
 /**
  * Function to element wise to divide any combination of two arrays / scalars
  * @param {Array|Number} first the first item.
@@ -2239,6 +2260,33 @@ function divide(first, second) {
 		});
 	} else {
 		return [first / second];
+	}
+}
+
+/**
+ * Function to element wise to divide any combination of two arrays / scalars
+ * @param {Array|Number} first the first item.
+ * @param {Array|Number} second the second item.
+ * @returns {Array} the divided array. if a scalar is involved, each element of the array is divided by the scalar. 
+ */
+function mod(first, second) {
+	if ($.isArray(first) && $.isArray(second)) {
+		if (first.length != second.length) {
+			throw "array divide, dimensions don't agree";
+		}
+		return jQuery.map(first, function(n, i) {
+			return n % second[i];
+		});
+	} else if ($.isArray(first) && ! $.isArray(second)) {
+		return jQuery.map(first, function(n, i) {
+			return n % second;
+		});
+	} else if (! $.isArray(first) && $.isArray(second)) {
+		return jQuery.map(second, function(n, i) {
+			return n % first;
+		});
+	} else {
+		return [first % second];
 	}
 }
 
